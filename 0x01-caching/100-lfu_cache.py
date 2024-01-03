@@ -4,9 +4,11 @@ This module introduces a class
 '''
 from base_caching import BaseCaching
 
+
 class LFUCache(BaseCaching):
     """
-    LFUCache class that inherits from BaseCaching and implements a caching system using the LFU (Least Frequently Used) algorithm.
+    LFUCache class that inherits from BaseCaching and implements
+    a caching system using the LFU (Least Frequently Used) algorithm.
 
     Attributes:
         MAX_ITEMS (int): Maximum number of items the cache can hold.
@@ -32,14 +34,17 @@ class LFUCache(BaseCaching):
     def put(self, key, item):
         """
         Inserts an item into the cache or updates the existing item.
-        If the cache is full, it applies LFU eviction to remove the least frequently used item.
+        If the cache is full, it applies LFU eviction to
+        remove the least frequently used item.
         """
         if key is None or item is None:
             return
 
         if len(self.cache_data) >= self.MAX_ITEMS:
             min_freq = min(self.frequency.values())
-            least_freq_used = [k for k, y in self.frequency.items() if y == min_freq]
+            least_freq_used = [
+                k for k, y in self.frequency.items() if y == min_freq
+            ]
 
             if len(least_freq_used) > 1:
                 least_recently_used = min(
